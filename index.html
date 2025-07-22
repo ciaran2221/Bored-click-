@@ -1,65 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>BoredClick - Funny Shorts</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BoredClick</title>
   <style>
     body {
       margin: 0;
-      background-color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
     }
+
+    .video-container {
+      position: relative;
+      padding-top: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+
     iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border: none;
+    }
+
+    .ads {
+      margin: 20px 0;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .ads a {
+      background: red;
+      padding: 15px;
+      margin: 5px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .logo {
+      font-size: 2em;
+      font-weight: bold;
+      color: #ff0033;
+      margin: 20px 0;
     }
   </style>
 </head>
 <body>
-  <iframe
-    id="shortPlayer"
-    width="360"
-    height="640"
-    allow="autoplay; encrypted-media"
-    allowfullscreen
-  ></iframe>
+  <div class="logo">BOREDCLICK</div>
+
+  <div class="video-container">
+    <iframe id="yt-player"
+      src=""
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="ads">
+    <a href="https://www.temu.com/" target="_blank">🔥 Shop Temu Deals</a>
+    <a href="https://www.amazon.com/" target="_blank">🛒 Amazon Must-Haves</a>
+  </div>
 
   <script>
     const shorts = [
-      "MbB1GKR0JmQ", "kx0ArfGJqVk", "Y7-Ll_qBZV8", "DUdA9xB5afg",
-      "HcYTb_zZ_Y0", "myuVjOpiwjY", "R7ejGElTj2s", "9YhKAZKrmWs",
-      "zmd6uLGgq-Y", "9ntD0U4crxU"
+      "https://www.youtube.com/embed/xcyEy2t4AeE", // prank
+      "https://www.youtube.com/embed/kM99kH1BSxE", // funny fail
+      "https://www.youtube.com/embed/BtOKAU-oqeE", // scare cam
+      "https://www.youtube.com/embed/duad3UV9QOY", // funny gym
+      "https://www.youtube.com/embed/6EUfqRa-WzA", // dog prank
+      "https://www.youtube.com/embed/8BxBdsZG8J0", // dance fail
     ];
 
-    let current = 0;
-    const player = document.getElementById("shortPlayer");
-
-    function loadShort(id) {
-      player.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&enablejsapi=1`;
+    function loadVideo() {
+      const player = document.getElementById("yt-player");
+      const random = shorts[Math.floor(Math.random() * shorts.length)];
+      player.src = random + "?autoplay=1&mute=1&rel=0&loop=1";
     }
 
-    function nextShort() {
-      current = (current + 1) % shorts.length;
-      loadShort(shorts[current]);
-    }
-
-    function onYouTubeIframeAPIReady() {
-      new YT.Player("shortPlayer", {
-        events: {
-          onStateChange: (e) => {
-            if (e.data === 0) nextShort(); // Video ended
-          }
-        }
-      });
-    }
-
-    loadShort(shorts[current]);
-
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.body.appendChild(tag);
+    loadVideo();
+    setInterval(loadVideo, 60000); // Change video every 60 seconds
   </script>
 </body>
 </html>
