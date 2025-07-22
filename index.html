@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BoredClick.com 🔥</title>
+  <title>BoredClick 🔥</title>
   <style>
     body {
       background: #000;
@@ -53,7 +53,7 @@
     async function loadNext() {
       title.innerText = "Loading new clip...";
       try {
-        const res = await fetch("https://boredclick-api.vercel.app/api/video"); // ✅ I deployed this
+        const res = await fetch("https://boredclick-api.vercel.app/api/video");
         const data = await res.json();
         video.src = data.url;
         title.innerText = data.title || "Untitled Clip";
@@ -68,5 +68,6 @@
 
     loadNext(); // Load first video
   </script>
+
 </body>
 </html>
