@@ -28,16 +28,9 @@
 
   <script>
     const shorts = [
-      "jTxzOyxye-8", // Funny kid
-      "MEU0Sxgd9Fo", // Elevator prank
-      "DMxhS_B8uw4", // Classic fall prank
-      "q0yOH5E8YvE", // Prank fail
-      "6Y8zydOgzZY", // Jump scare joke
-      "CevxZvSJLk0", // Hidden camera laugh
-      "Mkz8KtV0mrA", // Clown scare
-      "U_pJPcYtA_E", // Trolling
-      "6EByVtAowX8", // Realistic dinosaur prank
-      "OSRJmRTbfeA"  // Fake fart machine
+      "MbB1GKR0JmQ", "kx0ArfGJqVk", "Y7-Ll_qBZV8", "DUdA9xB5afg",
+      "HcYTb_zZ_Y0", "myuVjOpiwjY", "R7ejGElTj2s", "9YhKAZKrmWs",
+      "zmd6uLGgq-Y", "9ntD0U4crxU"
     ];
 
     let current = 0;
@@ -53,10 +46,10 @@
     }
 
     function onYouTubeIframeAPIReady() {
-      const ytPlayer = new YT.Player("shortPlayer", {
+      new YT.Player("shortPlayer", {
         events: {
-          onStateChange: (event) => {
-            if (event.data === 0) nextShort(); // Ended
+          onStateChange: (e) => {
+            if (e.data === 0) nextShort(); // Video ended
           }
         }
       });
@@ -64,7 +57,6 @@
 
     loadShort(shorts[current]);
 
-    // Load YouTube Iframe API
     const tag = document.createElement("script");
     tag.src = "https://www.youtube.com/iframe_api";
     document.body.appendChild(tag);
