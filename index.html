@@ -6,24 +6,22 @@
   <title>BOREDCLICK.COM</title>
   <style>
     body {
-      margin: 0;
       background-color: #111;
-      color: white;
+      color: #fff;
       font-family: Arial, sans-serif;
       text-align: center;
+      margin: 0;
     }
     header {
-      background-color: red;
+      background: red;
       padding: 20px;
       font-size: 32px;
       font-weight: bold;
     }
-    iframe {
-      width: 90%;
-      height: 500px;
-      border: none;
+    #meme {
       margin-top: 20px;
-      border-radius: 10px;
+      max-width: 90%;
+      border-radius: 12px;
     }
     .ads {
       margin: 30px auto;
@@ -35,13 +33,13 @@
       margin-bottom: 15px;
     }
     button {
-      margin: 20px;
-      padding: 10px 20px;
+      margin-top: 25px;
+      padding: 12px 24px;
       font-size: 18px;
       background-color: red;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
     }
   </style>
@@ -50,13 +48,10 @@
 
   <header>BOREDCLICK.COM</header>
 
-  <!-- 🔁 Meme Feed Embed (Imgur) -->
-  <iframe id="memeFrame" src="https://imgur.com/t/funny/embed"></iframe>
+  <img id="meme" src="" alt="Loading meme..." />
+  <br/>
+  <button onclick="loadMeme()">Give Me Another</button>
 
-  <br>
-  <button onclick="refreshMeme()">Give Me Another</button>
-
-  <!-- 💰 Ad Slots -->
   <div class="ads">
     <a href="https://temu.com/YOUR-AFFILIATE-LINK" target="_blank">
       <img src="https://your-image.com/temu-banner.jpg" alt="Shop Temu">
@@ -67,11 +62,17 @@
   </div>
 
   <script>
-    function refreshMeme() {
-      const iframe = document.getElementById("memeFrame");
-      iframe.src = iframe.src.split("?")[0] + "?t=" + new Date().getTime();
+    async function loadMeme() {
+      try {
+        const res = await fetch('https://www.reddit.com/r/funny/top/.json?limit=50&t=day');
+        const data = await res.json();
+        const posts = data.data.children.filter(post => post.data.post_hint === 'image');
+        const randomPost = posts[Math.floor(Math.random() * posts.length)];
+        document.getElementById('meme').src = randomPost.data.url;
+      } catch (err) {
+        console.error(err);
+        document.getElementById('meme').alt = "Couldn't load meme. Try again!";
+      }
     }
-  </script>
 
-</body>
-</html>
+    //
