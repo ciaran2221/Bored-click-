@@ -3,24 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BoredClick - Laugh Now</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>BoredClick.com 🔥</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    video {
+      width: 100%;
+      max-width: 600px;
+      border: 4px solid red;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+    h1 {
+      font-size: 2em;
+      color: red;
+    }
+    #title {
+      margin: 10px 0;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 16px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>BoredClick</h1>
 
-    <div class="clicker-section">
-      <img id="meme" alt="Loading meme..." />
-      <button onclick="loadMeme()">Next Meme</button>
-    </div>
+  <h1>BoredClick 🔥</h1>
+  <video id="clip" autoplay muted controls playsinline></video>
+  <div id="title">Loading...</div>
+  <button onclick="loadNext()">Next Clip</button>
 
-    <div class="clip-section">
-      <video id="funnyClip" controls autoplay muted playsinline loop></video>
-      <button onclick="loadClip()">Next Clip</button>
-    </div>
-  </div>
+  <script>
+    const video = document.getElementById("clip");
+    const title = document.getElementById("title");
 
-  <script src="script.js"></script>
+    async function loadNext() {
+      title.innerText = "Loading new clip...";
+      try {
+        const res = await fetch("https://boredclick-api.vercel.app/api/video"); // 🔁 Use your backend URL here
+        const data = await res.json();
+        video.src = data.url;
+        title.innerText = data.title || "Untitled Clip";
+      } catch (e) {
+        title.innerText = "Error loading clip. Retrying...";
+        setTimeout(loadNext, 2000);
+      }
+    }
+
+    video.onended = loadNext;
+    video.onerror = loadNext;
+
+    loadNext(); // Load first video
+  </script>
 </body>
 </html>
