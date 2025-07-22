@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BOREDCLICK.COM</title>
   <style>
     body {
@@ -18,13 +18,13 @@
       font-size: 32px;
       font-weight: bold;
     }
-    iframe {
-      border: none;
-      width: 100%;
-      height: 600px;
+    #meme {
+      max-width: 90%;
+      margin: 20px auto;
+      border-radius: 10px;
     }
     .ads {
-      margin: 20px auto;
+      margin: 30px auto;
       max-width: 500px;
     }
     .ads img {
@@ -32,24 +32,46 @@
       border-radius: 8px;
       margin-bottom: 15px;
     }
+    button {
+      margin: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
   <header>BOREDCLICK.COM</header>
 
-  <!-- 🔥 Always Fresh Funny Content -->
-  <iframe src="https://www.reddit.com/r/funny/top/?t=day"></iframe>
+  <!-- 🔁 Meme Content Loads Here -->
+  <img id="meme" src="" alt="Loading meme..." />
+  <br/>
+  <button onclick="loadMeme()">Show Me Something Funnier</button>
 
-  <!-- 💰 Affiliate Ads Below -->
+  <!-- 💰 Affiliate Ads -->
   <div class="ads">
-    <a href="https://temu.com/your-affiliate-link" target="_blank">
+    <a href="https://temu.com/YOUR-AFFILIATE-LINK" target="_blank">
       <img src="https://your-image.com/temu-banner.jpg" alt="Shop Temu">
     </a>
-    <a href="https://amazon.com/your-affiliate-link" target="_blank">
+    <a href="https://amazon.com/YOUR-AFFILIATE-LINK" target="_blank">
       <img src="https://your-image.com/amazon-banner.jpg" alt="Shop Amazon">
     </a>
   </div>
 
+  <script>
+    async function loadMeme() {
+      const res = await fetch('https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=funny');
+      const data = await res.json();
+      document.getElementById('meme').src = data.data.images.original.url;
+    }
+    loadMeme(); // Load one on start
+  </script>
+
 </body>
 </html>
+
