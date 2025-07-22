@@ -1,47 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>BoredClick 🔥</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body { background: #000; color: #fff; font-family: sans-serif; text-align: center; padding: 20px; margin: 0; }
-    h1 { color: red; font-size: 2em; margin-bottom: 10px; }
-    video { width: 90%; max-width:600px; border:4px solid red; border-radius:12px; margin:20px auto; display:block; }
-    #title { margin-bottom: 15px; font-size:1.1em; }
-    button { background:red; color:white; border:none; padding:10px 20px; font-size:16px; border-radius:6px; cursor:pointer; }
-  </style>
-</head>
+<html>
+<head><meta charset="UTF-8"><title>Test Clip</title></head>
 <body>
-
-  <h1>BoredClick 🔥</h1>
-  <video id="clip" autoplay muted controls playsinline></video>
-  <div id="title">Getting clip...</div>
-  <button onclick="loadClip()">Next Clip</button>
-
-  <script>
-    const videoElm = document.getElementById("clip");
-    const titleElm = document.getElementById("title");
-
-    async function loadClip() {
-      titleElm.innerText = "Loading clip...";
-      try {
-        const res = await fetch("https://boredclick-fixed.vercel.app/api/video");
-        if (!res.ok) throw new Error("HTTP "+res.status);
-        const data = await res.json();
-        videoElm.src = data.url;
-        titleElm.innerText = data.title || "Untitled";
-      } catch (e) {
-        titleElm.innerText = "Failed to load 🤔 Try again.";
-        console.error("Clip load error:", e);
-      }
-    }
-
-    videoElm.onended = loadClip;
-    videoElm.onerror = loadClip;
-
-    window.onload = loadClip;
-  </script>
-
+<video src="https://v.redd.it/zz3ijodgwcdb1/DASH_720.mp4" controls autoplay muted style="width:90%;max-width:600px;"></video>
 </body>
 </html>
