@@ -3,80 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BoredClick - Viral Stream</title>
+  <title>BoredClick</title>
   <style>
     body {
-      background: #111;
-      color: #fff;
-      font-family: sans-serif;
-      text-align: center;
       margin: 0;
       padding: 0;
-    }
-    h1 {
-      background: #e60000;
+      background: #111;
       color: #fff;
-      padding: 15px;
-      margin: 0;
-      font-size: 24px;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
     }
-    #meme, #gif {
-      margin: 20px auto;
+
+    h1 {
+      margin-top: 20px;
+      font-size: 2.5em;
+      color: #f00;
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    #meme {
       max-width: 90%;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #e60000;
-    }
-    .ad-section {
+      max-height: 80vh;
       margin-top: 30px;
+      border: 5px solid #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #fff;
     }
-    iframe {
-      width: 320px;
-      height: 100px;
+
+    button {
+      margin: 30px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background: red;
       border: none;
-      margin: 10px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 5px white;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: #aaa;
+      font-size: 0.9em;
     }
   </style>
 </head>
 <body>
-  <h1>BoredClick 🔁 Auto-Meme Madness</h1>
-  <img id="meme" src="" alt="Meme loading..." />
-  <img id="gif" src="" alt="GIF loading..." />
-
-  <div class="ad-section">
-    <!-- Replace with your real affiliate ad codes -->
-    <iframe src="https://temu.to/m/xyz123" title="Temu Ad"></iframe>
-    <iframe src="https://amazon.com/affiliate/xyz123" title="Amazon Ad"></iframe>
+  <h1>🔥 BoredClick 🔥</h1>
+  <img id="meme" src="" alt="Loading meme..." />
+  <div>
+    <button onclick="nextMeme()">Next Click</button>
   </div>
+  <footer>
+    Powered by Meme API · No login. No problem.
+  </footer>
 
-  <script>
-    async function getMeme() {
-      try {
-        const res = await fetch("https://meme-api.com/gimme");
-        const data = await res.json();
-        document.getElementById("meme").src = data.url;
-      } catch (e) {
-        document.getElementById("meme").src = "https://i.imgur.com/4M7IWwP.gif"; // fallback meme
-      }
-    }
-
-    async function getGif() {
-      try {
-        const key = "dc6zaTOxFJmzC"; // GIPHY public beta key
-        const res = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${key}&tag=funny&rating=pg`);
-        const data = await res.json();
-        document.getElementById("gif").src = data.data.images.original.url;
-      } catch (e) {
-        document.getElementById("gif").src = "https://media.giphy.com/media/3oEduSbSGpGaRX2Vri/giphy.gif"; // fallback gif
-      }
-    }
-
-    function refreshContent() {
-      getMeme();
-      getGif();
-    }
-
-    refreshContent(); // load right away
-    setInterval(refreshContent, 15000); // every 15 sec
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
