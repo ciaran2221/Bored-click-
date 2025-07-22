@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -45,19 +45,4 @@
     async function loadMeme() {
       try {
         const response = await fetch('https://www.reddit.com/r/funny/top.json?t=day&limit=50');
-        const json = await response.json();
-        const posts = json.data.children;
-        const images = posts.filter(p => p.data.post_hint === 'image');
-        const randomImage = images[Math.floor(Math.random() * images.length)];
-        document.getElementById('meme').src = randomImage.data.url;
-      } catch (error) {
-        document.getElementById('meme').alt = "Error loading meme.";
-        console.log(error);
-      }
-    }
-
-    loadMeme();
-  </script>
-
-</body>
-</html>
+        const json = await 
