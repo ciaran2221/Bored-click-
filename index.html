@@ -1,73 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>BoredClick 🔥</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
-      background: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
+      background-color: black;
+      color: white;
+      font-family: sans-serif;
       text-align: center;
-      margin: 0;
       padding: 20px;
     }
+
+    h1 {
+      color: red;
+      font-size: 2.2em;
+    }
+
     video {
-      width: 100%;
+      width: 95%;
       max-width: 600px;
       border: 4px solid red;
       border-radius: 12px;
-      margin-top: 20px;
+      margin: 20px auto;
     }
-    h1 {
-      font-size: 2em;
-      color: red;
-    }
-    #title {
-      margin: 10px 0;
-    }
+
     button {
-      margin-top: 20px;
-      padding: 12px 20px;
-      font-size: 16px;
       background: red;
       color: white;
       border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 15px;
       border-radius: 6px;
       cursor: pointer;
+    }
+
+    #title {
+      margin-top: 10px;
+      font-size: 1.1em;
     }
   </style>
 </head>
 <body>
-
   <h1>BoredClick 🔥</h1>
   <video id="clip" autoplay muted controls playsinline></video>
   <div id="title">Loading...</div>
-  <button onclick="loadNext()">Next Clip</button>
+  <button onclick="nextClip()">Next Clip</button>
 
   <script>
+    const videos = [
+      {
+        title: "Guy slips on ice 🤣",
+        url: "https://v.redd.it/lv3uhx3g1kfc1/DASH_720.mp4"
+      },
+      {
+        title: "Dog fails the jump 🐶",
+        url: "https://v.redd.it/47jjdvmdll5d1/DASH_720.mp4"
+      },
+      {
+        title: "Grandma roast session 🔥",
+        url: "https://v.redd.it/oxhzsxf82wdc1/DASH_720.mp4"
+      }
+    ];
+
+    let index = 0;
     const video = document.getElementById("clip");
     const title = document.getElementById("title");
 
-    async function loadNext() {
-      title.innerText = "Loading new clip...";
-      try {
-        const res = await fetch("https://boredclick-api.vercel.app/api/video");
-        const data = await res.json();
-        video.src = data.url;
-        title.innerText = data.title || "Untitled Clip";
-      } catch (e) {
-        title.innerText = "Error loading clip. Retrying...";
-        setTimeout(loadNext, 2000);
-      }
+    function nextClip() {
+      index = (index + 1) % videos.length;
+      video.src = videos[index].url;
+      title.innerText = videos[index].title;
     }
 
-    video.onended = loadNext;
-    video.onerror = loadNext;
+    video.onended = nextClip;
+    video.onerror = nextClip;
 
-    loadNext(); // Load first video
+    // Load first clip
+    nextClip();
   </script>
-
 </body>
 </html>
