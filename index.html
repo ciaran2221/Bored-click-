@@ -1,100 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>BoredClick - Viral Memes & Clips</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #111;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: row;
-      height: 100vh;
-      overflow: hidden;
-    }
-    #memeSection, #clipSection {
-      width: 50%;
-      padding: 20px;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
-    #memeImg, #clipVideo {
-      max-width: 100%;
-      max-height: 70vh;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-    button {
-      background-color: #e50914;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    h1 {
-      color: #ff4757;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BoredClick - Laugh Now</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <h1>BoredClick</h1>
 
-  <div id="memeSection">
-    <h1>😎 Meme Clicker</h1>
-    <img id="memeImg" src="https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif" alt="Meme">
-    <br>
-    <button onclick="loadMeme()">Next Meme</button>
+    <div class="clicker-section">
+      <img id="meme" alt="Loading meme..." />
+      <button onclick="loadMeme()">Next Meme</button>
+    </div>
+
+    <div class="clip-section">
+      <video id="funnyClip" controls autoplay muted playsinline loop></video>
+      <button onclick="loadClip()">Next Clip</button>
+    </div>
   </div>
 
-  <div id="clipSection">
-    <h1>😂 Funny Clip</h1>
-    <video id="clipVideo" controls autoplay muted loop>
-      <source src="https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <br>
-    <button onclick="loadClip()">Next Clip</button>
-  </div>
-
-  <script>
-    const memes = [
-      "https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif",
-      "https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif",
-      "https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif",
-      "https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif",
-      "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
-    ];
-
-    const clips = [
-      "https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.mp4",
-      "https://media.giphy.com/media/3o6fJd5z9gtt8koWbC/giphy.mp4",
-      "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.mp4",
-      "https://media.giphy.com/media/xUOwGmoUzy1yDUQcko/giphy.mp4",
-      "https://media.giphy.com/media/l2JhLz3uhK7YvpgU0/giphy.mp4"
-    ];
-
-    function loadMeme() {
-      const randomMeme = memes[Math.floor(Math.random() * memes.length)];
-      document.getElementById('memeImg').src = randomMeme;
-    }
-
-    function loadClip() {
-      const randomClip = clips[Math.floor(Math.random() * clips.length)];
-      const video = document.getElementById('clipVideo');
-      video.src = randomClip;
-      video.load();
-      video.play();
-    }
-
-    // Auto-cycle every 20 seconds
-    setInterval(() => {
-      loadMeme();
-      loadClip();
-    }, 20000);
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
