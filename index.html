@@ -6,36 +6,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
-      background: #000;
-      color: #fff;
+      background: black;
+      color: white;
       font-family: sans-serif;
       text-align: center;
       margin: 0;
       padding: 20px;
     }
+
     h1 {
-      color: red;
       font-size: 2em;
-      margin-bottom: 10px;
+      color: red;
     }
+
     video {
-      width: 95%;
+      width: 100%;
       max-width: 600px;
       border: 4px solid red;
       border-radius: 12px;
-      margin: 20px auto;
+      margin-top: 20px;
     }
+
     #title {
-      margin: 10px 0;
+      margin-top: 10px;
       font-size: 1.1em;
     }
+
     button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 16px;
       background: red;
       color: white;
       border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-top: 10px;
       border-radius: 6px;
       cursor: pointer;
     }
@@ -51,16 +54,16 @@
   <script>
     const videos = [
       {
-        title: "Kid wipes out in hallway",
-        url: "https://v.redd.it/n2vj3ap6emcb1/DASH_720.mp4"
+        title: "Dude runs into pole",
+        url: "https://v.redd.it/h2zrrum3c0cb1/DASH_720.mp4"
       },
       {
-        title: "Dog eats a whole cake",
-        url: "https://v.redd.it/bt8s5o1n66eb1/DASH_720.mp4"
+        title: "Cat jumps and misses",
+        url: "https://v.redd.it/ij39ebov1xcb1/DASH_720.mp4"
       },
       {
-        title: "Guy falls trying to show off",
-        url: "https://v.redd.it/ruc4egkh9zcb1/DASH_720.mp4"
+        title: "Girl faceplants on slide",
+        url: "https://v.redd.it/4oqmcupklvfb1/DASH_720.mp4"
       }
     ];
 
@@ -70,14 +73,15 @@
 
     function nextClip() {
       index = (index + 1) % videos.length;
-      video.src = videos[index].url;
-      title.innerText = videos[index].title;
+      const clip = videos[index];
+      video.src = clip.url;
+      title.innerText = clip.title;
     }
 
-    video.onended = nextClip;
     video.onerror = nextClip;
+    video.onended = nextClip;
 
-    // Load first video
+    // Load first clip
     nextClip();
   </script>
 
