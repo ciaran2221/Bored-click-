@@ -2,68 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BoredClick - Always Something Funny</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BOREDCLICK.COM</title>
   <style>
     body {
       margin: 0;
-      background: #111;
-      color: #fff;
-      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: white;
+      font-family: sans-serif;
       text-align: center;
     }
-    h1 {
-      background: #e60000;
-      margin: 0;
-      padding: 1em;
+    header {
+      background: red;
+      padding: 20px;
+      font-size: 2em;
+      font-weight: bold;
     }
-    .gif-container {
-      max-width: 600px;
+    #meme-box {
       margin: 20px auto;
+      max-width: 90%;
+      border: 3px solid red;
+      padding: 10px;
+      background-color: #222;
     }
     img {
-      width: 100%;
-      border: 5px solid #e60000;
+      max-width: 100%;
       border-radius: 8px;
     }
-    .ads {
+    button {
       margin-top: 20px;
-    }
-    .ads iframe {
-      width: 90%;
-      max-width: 300px;
-      height: 250px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background: red;
+      color: white;
       border: none;
+      border-radius: 6px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>BOREDCLICK.COM</h1>
-  <div class="gif-container">
-    <img id="giphy" src="" alt="Loading...">
+  <header>BOREDCLICK.COM</header>
+  <div id="meme-box">
+    <p>Loading...</p>
   </div>
-  <div class="ads">
-    <!-- Amazon Affiliate Ad -->
-    <iframe src="https://www.amazon.com/s?k=funny+gifts&tag=YOURAMAZONTAG" loading="lazy"></iframe>
-
-    <!-- Temu Affiliate Ad -->
-    <iframe src="https://www.temu.com/affiliate.html?pub_id=YOURTEMUID" loading="lazy"></iframe>
-  </div>
+  <button onclick="loadMeme()">New Meme</button>
 
   <script>
-    async function loadGif() {
-      const res = await fetch(
-        "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=1"
-      );
-      const data = await res.json();
-      const gif = data.data[0].images.original.url;
-      document.getElementById("giphy").src = gif;
+    async function loadMeme() {
+      const box = document.getElementById('meme-box');
+      box.innerHTML = '<p>Loading...</p>';
+      try {
+        const res = await fetch('https://meme-api.com/gimme/funny');
+        const data = await res.json();
+        box.innerHTML = `
+          <h3>${data.title}</h3>
+          <img src="${data.url}" alt="meme" />
+          <p><small>From r/${data.subreddit}</small></p>
+        `;
+      } catch (e) {
+        box.innerHTML = '<p>Failed to load meme. Try again later.</p>';
+      }
     }
-
-    // Load a new gif every 10 seconds
-    loadGif();
-    setInterval(loadGif, 10000);
+    loadMeme();
   </script>
 </body>
 </html>
-
