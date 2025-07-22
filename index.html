@@ -2,97 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BoredClick - Earn While Bored</title>
+  <title>BoredClick - Auto TikTok Feed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
-      background: #0d0d0d;
+      background-color: #000;
       color: #fff;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 60px 20px;
+      margin: 0;
+      padding: 0;
     }
-
     h1 {
-      font-size: 3em;
-      margin-bottom: 10px;
+      margin-top: 30px;
     }
-
-    p {
-      font-size: 1.2em;
-      margin-bottom: 30px;
+    .embed-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      margin: 30px auto;
+      max-width: 500px;
     }
-
-    #clickBtn {
-      background: #00ccff;
-      border: none;
-      padding: 20px 40px;
-      font-size: 2em;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: transform 0.1s ease;
-    }
-
-    #clickBtn:active {
-      transform: scale(0.95);
-    }
-
-    #counter {
-      font-size: 1.4em;
-      margin-top: 25px;
-    }
-
-    .ads, .affiliates {
-      margin-top: 40px;
-    }
-
-    .affiliate-link {
-      display: block;
-      margin: 12px 0;
-      color: #00ffcc;
-      text-decoration: underline;
-      font-weight: bold;
-    }
-
-    iframe {
-      margin-top: 40px;
-      border: none;
+    .ads a {
+      display: inline-block;
+      margin: 20px;
+      padding: 10px 20px;
+      background: #ff5e00;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
-  <h1>BoredClick</h1>
-  <p>Every click makes you a little richer (or not).</p>
-  
-  <button id="clickBtn">I'm So Bored</button>
-  <div id="counter">Bored Clicks: 0</div>
+
+  <h1>🔥 BoredClick.com 🔥</h1>
+  <p>Latest from TikTok — No scroll needed.</p>
+
+  <div class="embed-box">
+    <!-- Replace the embed href with a TikTok profile or tag -->
+    <blockquote class="tiktok-embed" cite="https://www.tiktok.com/tag/fyp" data-unique-id="tag/fyp" data-embed-type="creator">
+      <section>Loading TikToks...</section>
+    </blockquote>
+    <script async src="https://www.tiktok.com/embed.js"></script>
+  </div>
 
   <div class="ads">
-    <!-- 🔥 AdSense placeholder -->
-    <p style="margin-top: 50px;">📢 Sponsored:</p>
-    <iframe src="https://www.bing.com" width="320" height="100" title="fake ad"></iframe>
+    <a href="https://temu.to/your-affiliate-link" target="_blank">🛒 Shop Temu Deals</a>
+    <a href="https://amazon.com/your-affiliate-link" target="_blank">📦 Best Amazon Finds</a>
   </div>
 
-  <div class="affiliates">
-    <p>🔥 Try these boredom fixes:</p>
-    <a href="https://temu.to/m/some-affiliate-link" class="affiliate-link" target="_blank">Get Free Junk on Temu</a>
-    <a href="https://amzn.to/some-affiliate" class="affiliate-link" target="_blank">Random Amazon Mystery Box</a>
-    <a href="https://shein.com/some-code" class="affiliate-link" target="_blank">Shein’s Dumbest Deals</a>
-  </div>
-
-  <script>
-    let count = 0;
-    const btn = document.getElementById("clickBtn");
-    const counter = document.getElementById("counter");
-
-    btn.addEventListener("click", () => {
-      count++;
-      counter.innerText = `Bored Clicks: ${count}`;
-
-      if (count % 50 === 0) {
-        window.open("https://www.boredpanda.com", "_blank");
-      }
-    });
-  </script>
 </body>
 </html>
