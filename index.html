@@ -2,92 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BoredClick</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BoredClick - Always Something Funny</title>
   <style>
     body {
       margin: 0;
-      background: black;
-      color: white;
+      background: #111;
+      color: #fff;
       font-family: Arial, sans-serif;
       text-align: center;
     }
-
-    .video-container {
-      position: relative;
-      padding-top: 56.25%;
-      height: 0;
-      overflow: hidden;
+    h1 {
+      background: #e60000;
+      margin: 0;
+      padding: 1em;
     }
-
-    iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .gif-container {
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    img {
       width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .ads {
-      margin: 20px 0;
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-    }
-
-    .ads a {
-      background: red;
-      padding: 15px;
-      margin: 5px;
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
+      border: 5px solid #e60000;
       border-radius: 8px;
     }
-
-    .logo {
-      font-size: 2em;
-      font-weight: bold;
-      color: #ff0033;
-      margin: 20px 0;
+    .ads {
+      margin-top: 20px;
+    }
+    .ads iframe {
+      width: 90%;
+      max-width: 300px;
+      height: 250px;
+      border: none;
     }
   </style>
 </head>
 <body>
-  <div class="logo">BOREDCLICK</div>
-
-  <div class="video-container">
-    <iframe id="yt-player"
-      src=""
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
+  <h1>BOREDCLICK.COM</h1>
+  <div class="gif-container">
+    <img id="giphy" src="" alt="Loading...">
   </div>
-
   <div class="ads">
-    <a href="https://www.temu.com/" target="_blank">🔥 Shop Temu Deals</a>
-    <a href="https://www.amazon.com/" target="_blank">🛒 Amazon Must-Haves</a>
+    <!-- Amazon Affiliate Ad -->
+    <iframe src="https://www.amazon.com/s?k=funny+gifts&tag=YOURAMAZONTAG" loading="lazy"></iframe>
+
+    <!-- Temu Affiliate Ad -->
+    <iframe src="https://www.temu.com/affiliate.html?pub_id=YOURTEMUID" loading="lazy"></iframe>
   </div>
 
   <script>
-    const shorts = [
-      "https://www.youtube.com/embed/xcyEy2t4AeE", // prank
-      "https://www.youtube.com/embed/kM99kH1BSxE", // funny fail
-      "https://www.youtube.com/embed/BtOKAU-oqeE", // scare cam
-      "https://www.youtube.com/embed/duad3UV9QOY", // funny gym
-      "https://www.youtube.com/embed/6EUfqRa-WzA", // dog prank
-      "https://www.youtube.com/embed/8BxBdsZG8J0", // dance fail
-    ];
-
-    function loadVideo() {
-      const player = document.getElementById("yt-player");
-      const random = shorts[Math.floor(Math.random() * shorts.length)];
-      player.src = random + "?autoplay=1&mute=1&rel=0&loop=1";
+    async function loadGif() {
+      const res = await fetch(
+        "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=1"
+      );
+      const data = await res.json();
+      const gif = data.data[0].images.original.url;
+      document.getElementById("giphy").src = gif;
     }
 
-    loadVideo();
-    setInterval(loadVideo, 60000); // Change video every 60 seconds
+    // Load a new gif every 10 seconds
+    loadGif();
+    setInterval(loadGif, 10000);
   </script>
 </body>
 </html>
+
