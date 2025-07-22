@@ -1,114 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>BOREDCLICK.COM</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BoredClick - Viral Stream</title>
   <style>
     body {
-      background-color: #111;
-      color: white;
-      font-family: 'Arial Black', sans-serif;
+      background: #111;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
       margin: 0;
       padding: 0;
-      text-align: center;
     }
     h1 {
-      background-color: #c40000;
+      background: #e60000;
+      color: #fff;
+      padding: 15px;
       margin: 0;
-      padding: 20px;
-      font-size: 2em;
-      letter-spacing: 1px;
+      font-size: 24px;
     }
-    .section {
-      margin: 25px 0;
-    }
-    .meme-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 0 10px;
-    }
-    .meme-box img, .gif-box img {
-      max-width: 300px;
+    #meme, #gif {
+      margin: 20px auto;
+      max-width: 90%;
       border-radius: 10px;
-      box-shadow: 0 0 10px #ff0000;
+      box-shadow: 0 0 15px #e60000;
     }
-    .gif-box {
-      margin: 30px 0;
-    }
-    .ads {
+    .ad-section {
       margin-top: 30px;
     }
-    .ads a {
-      display: inline-block;
+    iframe {
+      width: 320px;
+      height: 100px;
+      border: none;
       margin: 10px;
-      padding: 10px 15px;
-      background: #c40000;
-      color: white;
-      border-radius: 8px;
-      font-size: 1em;
-      text-decoration: none;
-    }
-    @media (max-width: 600px) {
-      .meme-row {
-        flex-direction: column;
-        align-items: center;
-      }
     }
   </style>
 </head>
 <body>
+  <h1>BoredClick 🔁 Auto-Meme Madness</h1>
+  <img id="meme" src="" alt="Meme loading..." />
+  <img id="gif" src="" alt="GIF loading..." />
 
-  <h1>BOREDCLICK.COM</h1>
-
-  <div class="section meme-row" id="meme-container">
-    <div class="meme-box"><p>Loading meme...</p></div>
-    <div class="meme-box"><p>Loading meme...</p></div>
-    <div class="meme-box"><p>Loading meme...</p></div>
-  </div>
-
-  <div class="section gif-box" id="gif-container">
-    <p>Loading gif...</p>
-  </div>
-
-  <div class="section ads">
-    <a href="https://www.amazon.com/s?k=funny+gifts&tag=YOURAMAZONTAG" target="_blank">Funny Amazon Stuff</a>
-    <a href="https://temu.to/m/yourtemulink" target="_blank">Weird Temu Deals</a>
+  <div class="ad-section">
+    <!-- Replace with your real affiliate ad codes -->
+    <iframe src="https://temu.to/m/xyz123" title="Temu Ad"></iframe>
+    <iframe src="https://amazon.com/affiliate/xyz123" title="Amazon Ad"></iframe>
   </div>
 
   <script>
-    async function loadMemes() {
-      const boxes = document.querySelectorAll('.meme-box');
-      for (let box of boxes) {
-        try {
-          const res = await fetch('https://meme-api.com/gimme/funny');
-          const meme = await res.json();
-          box.innerHTML = `<img src="${meme.url}" alt="Meme">`;
-        } catch {
-          box.innerHTML = "<p>Failed to load meme</p>";
-        }
-      }
-    }
-
-    async function loadGif() {
-      const giphyKey = 'dc6zaTOxFJmzC'; // Public beta key
-      const tag = 'funny+prank+lol';
+    async function getMeme() {
       try {
-        const res = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${giphyKey}&tag=${tag}&rating=pg`);
+        const res = await fetch("https://meme-api.com/gimme");
         const data = await res.json();
-        const url = data.data.images.original.url;
-        document.getElementById('gif-container').innerHTML = `<img src="${url}" alt="Funny GIF">`;
-      } catch {
-        document.getElementById('gif-container').innerHTML = "<p>Failed to load gif</p>";
+        document.getElementById("meme").src = data.url;
+      } catch (e) {
+        document.getElementById("meme").src = "https://i.imgur.com/4M7IWwP.gif"; // fallback meme
       }
     }
 
-    loadMemes();
-    loadGif();
-    setInterval(loadMemes, 15000); // Every 15 seconds
-    setInterval(loadGif, 20000);   // Every 20 seconds
-  </script>
+    async function getGif() {
+      try {
+        const key = "dc6zaTOxFJmzC"; // GIPHY public beta key
+        const res = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${key}&tag=funny&rating=pg`);
+        const data = await res.json();
+        document.getElementById("gif").src = data.data.images.original.url;
+      } catch (e) {
+        document.getElementById("gif").src = "https://media.giphy.com/media/3oEduSbSGpGaRX2Vri/giphy.gif"; // fallback gif
+      }
+    }
 
+    function refreshContent() {
+      getMeme();
+      getGif();
+    }
+
+    refreshContent(); // load right away
+    setInterval(refreshContent, 15000); // every 15 sec
+  </script>
 </body>
 </html>
