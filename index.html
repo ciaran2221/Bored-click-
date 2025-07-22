@@ -18,9 +18,11 @@
       font-size: 32px;
       font-weight: bold;
     }
-    #meme {
-      max-width: 90%;
-      margin: 20px auto;
+    iframe {
+      width: 90%;
+      height: 500px;
+      border: none;
+      margin-top: 20px;
       border-radius: 10px;
     }
     .ads {
@@ -48,12 +50,13 @@
 
   <header>BOREDCLICK.COM</header>
 
-  <!-- 🔁 Meme Content Loads Here -->
-  <img id="meme" src="" alt="Loading meme..." />
-  <br/>
-  <button onclick="loadMeme()">Show Me Something Funnier</button>
+  <!-- 🔁 Meme Feed Embed (Imgur) -->
+  <iframe id="memeFrame" src="https://imgur.com/t/funny/embed"></iframe>
 
-  <!-- 💰 Affiliate Ads -->
+  <br>
+  <button onclick="refreshMeme()">Give Me Another</button>
+
+  <!-- 💰 Ad Slots -->
   <div class="ads">
     <a href="https://temu.com/YOUR-AFFILIATE-LINK" target="_blank">
       <img src="https://your-image.com/temu-banner.jpg" alt="Shop Temu">
@@ -64,14 +67,11 @@
   </div>
 
   <script>
-    async function loadMeme() {
-      const res = await fetch('https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=funny');
-      const data = await res.json();
-      document.getElementById('meme').src = data.data.images.original.url;
+    function refreshMeme() {
+      const iframe = document.getElementById("memeFrame");
+      iframe.src = iframe.src.split("?")[0] + "?t=" + new Date().getTime();
     }
-    loadMeme(); // Load one on start
   </script>
 
 </body>
 </html>
-
