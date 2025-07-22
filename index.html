@@ -53,7 +53,7 @@
     async function loadNext() {
       title.innerText = "Loading new clip...";
       try {
-        const res = await fetch("https://boredclick-api.vercel.app/api/video"); // ✅ Already deployed, works!
+        const res = await fetch("https://boredclick-api.vercel.app/api/video"); // ✅ I deployed this
         const data = await res.json();
         video.src = data.url;
         title.innerText = data.title || "Untitled Clip";
