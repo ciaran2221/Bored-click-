@@ -4,28 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fact of the Day - BoredClick</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>💡 Fact of the Day</h1>
-    <nav>
-      <a href="index.html">Products</a>
-      <a href="fact.html">Fact of the Day</a>
-    </nav>
-  </header>
+  <div class="container">
+    <h1>🧠 Fact of the Day</h1>
+    <p id="fact-text">Loading fact...</p>
+    <button onclick="loadFact()">🔄 New Fact</button>
+    <a href="index.html">← Back to Products</a>
+  </div>
 
-  <main>
-    <div id="fact-container">
-      <button onclick="generateFact()">Get a New Fact</button>
-      <p id="fact-text">Click the button to get your daily fact.</p>
-    </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 BoredClick.com</p>
-  </footer>
-
-  <script src="facts.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
