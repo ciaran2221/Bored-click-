@@ -2,88 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>BoredClick 🔥</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body {
-      background: black;
-      color: white;
-      font-family: sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 2em;
-      color: red;
-    }
-
-    video {
-      width: 100%;
-      max-width: 600px;
-      border: 4px solid red;
-      border-radius: 12px;
-      margin-top: 20px;
-    }
-
-    #title {
-      margin-top: 10px;
-      font-size: 1.1em;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 12px 20px;
-      font-size: 16px;
-      background: red;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BoredClick - Weird Product Clicker</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <header>
+    <h1>🛒 BoredClick</h1>
+    <nav>
+      <a href="index.html">Products</a>
+      <a href="fact.html">Fact of the Day</a>
+    </nav>
+  </header>
 
-  <h1>BoredClick 🔥</h1>
-  <video id="clip" autoplay muted controls playsinline></video>
-  <div id="title">Loading...</div>
-  <button onclick="nextClip()">Next Clip</button>
+  <main>
+    <div id="product-container">
+      <button id="click-button">Click for a Weird Product</button>
+      <div id="product-display"></div>
+    </div>
+  </main>
 
-  <script>
-    const videos = [
-      {
-        title: "Dude runs into pole",
-        url: "https://v.redd.it/h2zrrum3c0cb1/DASH_720.mp4"
-      },
-      {
-        title: "Cat jumps and misses",
-        url: "https://v.redd.it/ij39ebov1xcb1/DASH_720.mp4"
-      },
-      {
-        title: "Girl faceplants on slide",
-        url: "https://v.redd.it/4oqmcupklvfb1/DASH_720.mp4"
-      }
-    ];
+  <footer>
+    <p>&copy; 2025 BoredClick.com • All Rights Reserved</p>
+  </footer>
 
-    let index = 0;
-    const video = document.getElementById("clip");
-    const title = document.getElementById("title");
-
-    function nextClip() {
-      index = (index + 1) % videos.length;
-      const clip = videos[index];
-      video.src = clip.url;
-      title.innerText = clip.title;
-    }
-
-    video.onerror = nextClip;
-    video.onended = nextClip;
-
-    // Load first clip
-    nextClip();
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
