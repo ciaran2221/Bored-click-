@@ -2,30 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BoredClick - Weird Product Clicker</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BoredClick - Weird Amazon Finds</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>🛒 BoredClick</h1>
-    <nav>
-      <a href="index.html">Products</a>
-      <a href="fact.html">Fact of the Day</a>
-    </nav>
-  </header>
-
-  <main>
-    <div id="product-container">
-      <button id="click-button">Click for a Weird Product</button>
-      <div id="product-display"></div>
+  <div class="container">
+    <h1>BoredClick 🤯</h1>
+    <div id="product-card">
+      <img id="product-image" src="" alt="Funny Product" />
+      <h2 id="product-title"></h2>
+      <a id="product-link" href="#" target="_blank">View on Amazon</a>
     </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 BoredClick.com • All Rights Reserved</p>
-  </footer>
-
+    <button onclick="loadProduct()">Click for Another</button>
+    <p class="fact">Fact of the Day: <span id="fact"></span></p>
+    <footer>
+      <a href="facts.html">🔮 Fact Generator</a>
+    </footer>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
